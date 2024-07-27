@@ -67,19 +67,11 @@ const MeetingTypeList = () => {
 
   if (!client || !user) return <Loader />;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const urlWithScheme = /^(http:\/\/|https:\/\/)/i.test(NEXT_PUBLIC_BASE_URL)
+    ? NEXT_PUBLIC_BASE_URL
+    : `https://${NEXT_PUBLIC_BASE_URL}`;
 
-  if (!baseUrl) {
-    throw new Error("Base URL is not defined");
-  }
-
-  // Check if the base URL includes a scheme (e.g., http:// or https://)
-  // If not, prepend https://
-  const urlWithScheme = /^(http:\/\/|https:\/\/)/i.test(baseUrl)
-    ? baseUrl
-    : `https://${baseUrl}`;
-
-  const meetingLink = `${urlWithScheme}/meeting/${callDetail?.id}`;
-
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`;
   console.log("Meeting Link:", meetingLink);
 
   return (

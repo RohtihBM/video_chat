@@ -1,25 +1,3 @@
-/* eslint-disable camelcase */
-"use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
-import HomeCard from "./HomeCard";
-import MeetingModal from "./MeetingModal";
-import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
-import { useUser } from "@clerk/nextjs";
-import Loader from "./Loader";
-import { Textarea } from "./ui/textarea";
-import ReactDatePicker from "react-datepicker";
-import { useToast } from "./ui/use-toast";
-import { Input } from "./ui/input";
-
-const initialValues = {
-  dateTime: new Date(),
-  description: "",
-  link: "",
-};
-
 const MeetingTypeList = () => {
   const router = useRouter();
   const [meetingState, setMeetingState] = useState<
@@ -66,20 +44,8 @@ const MeetingTypeList = () => {
   };
 
   if (!client || !user) return <Loader />;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  if (!baseUrl) {
-    throw new Error("Base URL is not defined");
-  }
-
-  // Check if the base URL includes a scheme (e.g., http:// or https://)
-  // If not, prepend https://
-  const urlWithScheme = /^(http:\/\/|https:\/\/)/i.test(baseUrl)
-    ? baseUrl
-    : `https://${baseUrl}`;
-
-  const meetingLink = `${urlWithScheme}/meeting/${callDetail?.id}`;
-
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetail?.id}`;
   console.log("Meeting Link:", meetingLink);
 
   return (

@@ -1,9 +1,10 @@
 // RootLayout: This is the main layout component for your Next.js application.
 // It wraps around all the pages and components within your app.
+// provides user information
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "react-datepicker/dist/react-datepicker.css";
